@@ -86,6 +86,7 @@
     <Compile Include="Model\CFTable.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\FoodCategory.cs" />
+    <Compile Include="Model\ViewModel\MenuViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAccountInfo.resx">

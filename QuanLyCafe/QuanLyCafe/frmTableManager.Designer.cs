@@ -35,6 +35,10 @@
             this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lsvBill = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnDiscount = new System.Windows.Forms.Button();
             this.nmDicsount = new System.Windows.Forms.NumericUpDown();
@@ -51,6 +55,9 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblTotalPrice = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -106,19 +113,44 @@
             this.panel2.Controls.Add(this.lsvBill);
             this.panel2.Location = new System.Drawing.Point(406, 109);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(382, 338);
+            this.panel2.Size = new System.Drawing.Size(382, 322);
             this.panel2.TabIndex = 2;
             // 
             // lsvBill
             // 
+            this.lsvBill.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
             this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(3, 3);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(376, 332);
+            this.lsvBill.Size = new System.Drawing.Size(376, 316);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
-            this.lsvBill.View = System.Windows.Forms.View.List;
+            this.lsvBill.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Tên món";
+            this.columnHeader1.Width = 120;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "SL";
+            this.columnHeader2.Width = 30;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Đơn giá";
+            this.columnHeader3.Width = 70;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Thành tiền";
+            this.columnHeader4.Width = 70;
             // 
             // panel3
             // 
@@ -206,6 +238,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.btnAdd);
             this.panel4.Controls.Add(this.nmCount);
             this.panel4.Controls.Add(this.label4);
@@ -219,7 +252,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(244, 12);
+            this.btnAdd.Location = new System.Drawing.Point(235, 12);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(78, 54);
             this.btnAdd.TabIndex = 2;
@@ -228,14 +261,14 @@
             // 
             // nmCount
             // 
-            this.nmCount.Location = new System.Drawing.Point(328, 29);
+            this.nmCount.Location = new System.Drawing.Point(319, 39);
             this.nmCount.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.nmCount.Name = "nmCount";
-            this.nmCount.Size = new System.Drawing.Size(40, 22);
+            this.nmCount.Size = new System.Drawing.Size(51, 22);
             this.nmCount.TabIndex = 3;
             this.nmCount.Value = new decimal(new int[] {
             1,
@@ -284,11 +317,42 @@
             this.flpTable.Size = new System.Drawing.Size(388, 483);
             this.flpTable.TabIndex = 4;
             // 
+            // lblTotalPrice
+            // 
+            this.lblTotalPrice.AutoSize = true;
+            this.lblTotalPrice.ForeColor = System.Drawing.Color.Red;
+            this.lblTotalPrice.Location = new System.Drawing.Point(678, 434);
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(45, 16);
+            this.lblTotalPrice.TabIndex = 5;
+            this.lblTotalPrice.Text = "0 VNĐ";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(606, 434);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 16);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Tổng tiền:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(316, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 16);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "S.Lượng";
+            // 
             // frmTableManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 526);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblTotalPrice);
             this.Controls.Add(this.flpTable);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -337,5 +401,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown nmCount;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Label lblTotalPrice;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label5;
     }
 }

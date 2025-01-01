@@ -22,6 +22,25 @@ namespace QuanLyCafe
             db = new CafeDBContext();
             InitializeComponent();
             loadTable();
+            loadCategory();
+        }
+
+        private void loadCategory()
+        {
+            db = new CafeDBContext();
+            var listCategory = db.FoodCategories.ToList();
+            cbCategory.DataSource = listCategory;
+            cbCategory.DisplayMember = "Name";
+            cbCategory.ValueMember = "idFoodCategory";
+        }
+
+        private void GetFoodByCategory(int idCategory)
+        {
+            db = new CafeDBContext();
+            var listFood = db.Foods.Where(x => x.idFoodCategory == idCategory).ToList();
+            cbFood.DataSource = listFood;
+            cbFood.DisplayMember = "Name";
+            cbFood.ValueMember = "idFood";
         }
 
         private void loadTable()
@@ -130,5 +149,24 @@ namespace QuanLyCafe
             frm.ShowDialog();
         }
 
+        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = 0;
+            ComboBox cb = sender as ComboBox;
+            if(cb.SelectedItem == null) return;
+            //Lấy giá trị idFoodCategory từ đối tượng FoodCategory được chọn trong combobox cbCategory và gán nó vào biến id.
+            id = (cb.SelectedItem as FoodCategory).idFoodCategory;
+            List<Food> listFood = GetAllByCategory(id);
+            cbFood.DataSource = listFood;
+            cbFood.DisplayMember = "Name";
+            cbFood.ValueMember = "idFood";
+        }
+
+        private List<Food> GetAllByCategory(int CategoryID)
+        {
+            db = new CafeDBContext();
+            List<Food> listFood = db.Foods.Where(x => x.idFoodCategory == CategoryID).ToList();
+            return listFood;
+        }
     }
 }

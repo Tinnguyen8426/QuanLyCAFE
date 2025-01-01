@@ -52,8 +52,8 @@
             this.nmCount = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbFood = new System.Windows.Forms.ComboBox();
+            this.cbCategory = new System.Windows.Forms.ComboBox();
             this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
             this.lblTotalPrice = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -243,8 +243,8 @@
             this.panel4.Controls.Add(this.nmCount);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.comboBox2);
-            this.panel4.Controls.Add(this.comboBox1);
+            this.panel4.Controls.Add(this.cbFood);
+            this.panel4.Controls.Add(this.cbCategory);
             this.panel4.Location = new System.Drawing.Point(406, 31);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(382, 72);
@@ -294,21 +294,22 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Tên";
             // 
-            // comboBox2
+            // cbFood
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(45, 42);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(184, 24);
-            this.comboBox2.TabIndex = 0;
+            this.cbFood.FormattingEnabled = true;
+            this.cbFood.Location = new System.Drawing.Point(45, 42);
+            this.cbFood.Name = "cbFood";
+            this.cbFood.Size = new System.Drawing.Size(184, 24);
+            this.cbFood.TabIndex = 0;
             // 
-            // comboBox1
+            // cbCategory
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(45, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(184, 24);
-            this.comboBox1.TabIndex = 0;
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Location = new System.Drawing.Point(45, 12);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(184, 24);
+            this.cbCategory.TabIndex = 0;
+            this.cbCategory.SelectedIndexChanged += new System.EventHandler(this.cbCategory_SelectedIndexChanged);
             // 
             // flpTable
             // 
@@ -388,8 +389,8 @@
         private System.Windows.Forms.ListView lsvBill;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbFood;
+        private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.NumericUpDown nmDicsount;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label2;

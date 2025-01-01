@@ -90,14 +90,14 @@
             // btnAccountInfo
             // 
             this.btnAccountInfo.Name = "btnAccountInfo";
-            this.btnAccountInfo.Size = new System.Drawing.Size(224, 26);
+            this.btnAccountInfo.Size = new System.Drawing.Size(210, 26);
             this.btnAccountInfo.Text = "Thông tin cá nhân";
             this.btnAccountInfo.Click += new System.EventHandler(this.btnAccountInfo_Click);
             // 
             // btnExit
             // 
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(224, 26);
+            this.btnExit.Size = new System.Drawing.Size(210, 26);
             this.btnExit.Text = "Đăng xuất";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -111,12 +111,14 @@
             // 
             // lsvBill
             // 
+            this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(3, 3);
             this.lsvBill.Name = "lsvBill";
             this.lsvBill.Size = new System.Drawing.Size(376, 332);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
+            this.lsvBill.View = System.Windows.Forms.View.List;
             // 
             // panel3
             // 

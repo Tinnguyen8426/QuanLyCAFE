@@ -7,13 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyCafe.Model;
 
 namespace QuanLyCafe
 {
     public partial class frmLogin : Form
     {
+        CafeDBContext db;
         public frmLogin()
         {
+            db = new CafeDBContext();
             InitializeComponent();
         }
 
@@ -36,6 +39,37 @@ namespace QuanLyCafe
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (login())
+            {
+                txtPasword.Text = "";
+                frmTableManager frm = new frmTableManager();
+                this.Hide();
+                frm.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                txtPasword.Text = "";
+                txtAccount.Focus();
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool login()
+        {
+            var account = db.Accounts.FirstOrDefault(x => x.UserName == txtAccount.Text && x.Password == txtPasword.Text);
+            if (account != null)
+            {
+                return true;
+            }
+            else
+            { 
+                return false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             frmTableManager frm = new frmTableManager();
             this.Hide();

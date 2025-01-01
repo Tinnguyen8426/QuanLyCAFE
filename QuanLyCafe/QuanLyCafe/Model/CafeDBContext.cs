@@ -15,15 +15,20 @@ namespace QuanLyCafe.Model
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Bill> Bills { get; set; }
         public virtual DbSet<BillInfo> BillInfoes { get; set; }
+        public virtual DbSet<CFTable> CFTables { get; set; }
         public virtual DbSet<Food> Foods { get; set; }
         public virtual DbSet<FoodCategory> FoodCategories { get; set; }
-        public virtual DbSet<Table> Tables { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Bill>()
                 .HasMany(e => e.BillInfoes)
                 .WithRequired(e => e.Bill)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CFTable>()
+                .HasMany(e => e.Bills)
+                .WithRequired(e => e.CFTable)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Food>()
@@ -34,11 +39,6 @@ namespace QuanLyCafe.Model
             modelBuilder.Entity<FoodCategory>()
                 .HasMany(e => e.Foods)
                 .WithRequired(e => e.FoodCategory)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Table>()
-                .HasMany(e => e.Bills)
-                .WithRequired(e => e.Table)
                 .WillCascadeOnDelete(false);
         }
     }

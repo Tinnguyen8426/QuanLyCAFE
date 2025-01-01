@@ -6,11 +6,11 @@ namespace QuanLyCafe.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Table")]
-    public partial class Table
+    [Table("CFTable")]
+    public partial class CFTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Table()
+        public CFTable()
         {
             Bills = new HashSet<Bill>();
         }

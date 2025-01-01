@@ -27,7 +27,7 @@ namespace QuanLyCafe.Model
 
         public int idTable { get; set; }
 
-        public virtual Table Table { get; set; }
+        public virtual CFTable CFTable { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillInfo> BillInfoes { get; set; }

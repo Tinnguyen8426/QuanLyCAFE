@@ -27,7 +27,7 @@ namespace QuanLyCafe
             dgvAccount.DataSource = listAccount;
             var listFood = db.Foods.ToList();
             dgvDrink.DataSource = listFood;
-            var listTable = db.Tables.ToList();
+            var listTable = db.CFTables.ToList();
             dgvTable.DataSource = listTable;
             var listFoodCategory = db.FoodCategories.ToList();
            dgvCategory.DataSource = listFoodCategory;

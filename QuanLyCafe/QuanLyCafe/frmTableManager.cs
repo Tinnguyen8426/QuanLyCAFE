@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -63,6 +64,7 @@ namespace QuanLyCafe
         private void Btn_Click(object sender, EventArgs e)
         {
             int tableID = ((sender as Button).Tag as CFTable).idTable;
+            lsvBill.Tag = sender as CFTable;
             showBill(tableID);
         }
 
@@ -167,6 +169,61 @@ namespace QuanLyCafe
             db = new CafeDBContext();
             List<Food> listFood = db.Foods.Where(x => x.idFoodCategory == CategoryID).ToList();
             return listFood;
+        }
+
+        private void insertBill(int TableID)
+        {
+            Bill bill = new Bill();
+            bill.DateCheckIn = DateTime.Now;
+            bill.DateCheckOut = null;
+            bill.Status = false;
+            bill.idTable = TableID;
+            db.Bills.AddOrUpdate(bill);
+            db.SaveChanges();
+        }
+
+        private void insertBillInfo(int BillID, int FoodID, int Count)
+        {
+            BillInfo billInfo = new BillInfo();
+            billInfo.idBill = BillID;
+            billInfo.idFood = FoodID;
+            billInfo.count = Count;
+            db.BillInfoes.AddOrUpdate(billInfo);
+            db.SaveChanges();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            CFTable cFTable = new CFTable();
+
+            int billID = getUncheckBillByTableID(cFTable.idTable);
+            int foodID = (cbFood.SelectedItem as Food).idFood;
+            int count = (int)nmCount.Value;
+            if (billID == -1)
+            {
+                //insertBill(billID);
+                insertBillInfo(getMaxBillID(),foodID,count);
+                //showBill(cFTable.idTable);
+            }
+            else
+            {
+                insertBillInfo(billID, foodID, count);
+                //showBill(cFTable.idTable);
+            }
+
+        }
+
+        private int getMaxBillID()
+        {
+            try
+            {
+                return db.Bills.Max(x => x.idBill);
+
+            }
+            catch
+            {
+                return 1;
+            }
         }
     }
 }

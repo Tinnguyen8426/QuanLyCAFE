@@ -10,7 +10,6 @@ namespace QuanLyCafe.Model
     public partial class BillInfo
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idBillInfo { get; set; }
 
         public int count { get; set; }

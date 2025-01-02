@@ -16,7 +16,6 @@ namespace QuanLyCafe.Model
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idTable { get; set; }
 
         [Required]

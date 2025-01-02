@@ -16,7 +16,6 @@ namespace QuanLyCafe.Model
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idBill { get; set; }
 
         public DateTime DateCheckIn { get; set; }

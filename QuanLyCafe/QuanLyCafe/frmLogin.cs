@@ -40,10 +40,13 @@ namespace QuanLyCafe
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (login())
+            string username = txtAccount.Text;
+            string password = txtPasword.Text;
+            if (login(username, password))
             {
+                Account loginAccount = GetAccountByUsername(username);
                 txtPasword.Text = "";
-                frmTableManager frm = new frmTableManager();
+                frmTableManager frm = new frmTableManager(loginAccount);
                 this.Hide();
                 frm.ShowDialog();
                 this.Show();
@@ -56,9 +59,9 @@ namespace QuanLyCafe
             }
         }
 
-        private bool login()
+        private bool login(string username, string password)
         {
-            var account = db.Accounts.FirstOrDefault(x => x.UserName == txtAccount.Text && x.Password == txtPasword.Text);
+            var account = db.Accounts.FirstOrDefault(x => x.UserName == username && x.Password == password);
             if (account != null)
             {
                 return true;
@@ -69,12 +72,12 @@ namespace QuanLyCafe
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        public Account GetAccountByUsername(string username)
         {
-            frmTableManager frm = new frmTableManager();
-            this.Hide();
-            frm.ShowDialog();
-            this.Show();
+            Account accounts = new Account();
+            accounts = db.Accounts.Where(x => x.UserName == username).FirstOrDefault();
+            return accounts;
         }
     }
 }

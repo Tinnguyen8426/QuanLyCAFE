@@ -20,12 +20,31 @@ namespace QuanLyCafe
     {
         CafeDBContext db;
         private List<MenuViewModel> listMenu; // <MenuViewModel>
-        public frmTableManager()
+
+
+        private Account loginAccount;
+        public Account LoginAccount
+        {
+            get { return loginAccount; } 
+            set { loginAccount = value; }
+        }
+
+        private void ChangeAccount(int type)
+        {
+            toolStripAdmin.Enabled = type == 1;
+            toolStripInfo.Text += " (" + loginAccount.DisplayName + ")";
+        }
+        public frmTableManager(Account acc)
         {
             db = new CafeDBContext();
             InitializeComponent();
-            loadTable();
+            UpdateTableStatus();
             loadCategory();
+            loadTable();
+            flpTable.AutoScroll = true;
+            lblTable.Text = "Đang không chọn bàn";
+            loginAccount = acc;
+            ChangeAccount(acc.Type);
         }
 
         private void loadCategory()
@@ -61,6 +80,7 @@ namespace QuanLyCafe
             int tableID = ((sender as Button).Tag as CFTable).idTable;
             lsvBill.Tag = (sender as Button).Tag;
             showBill(tableID);
+            lblTable.Text = "Đang chọn " + (sender as Button).Text.Split('\n')[0];
         }
 
         private void showBill(int tableID)
@@ -131,9 +151,9 @@ namespace QuanLyCafe
 
         private void btnAccountInfo_Click(object sender, EventArgs e)
         {
-            frmAccountInfo frm = new frmAccountInfo();
-            
+            frmAccountInfo frm = new frmAccountInfo(loginAccount);
             frm.ShowDialog();
+
             
         }
 
@@ -284,5 +304,6 @@ namespace QuanLyCafe
             }
             db.SaveChanges();
         }
+
     }
 }

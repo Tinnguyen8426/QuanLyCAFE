@@ -44,6 +44,7 @@ namespace QuanLyCafe
             flpTable.AutoScroll = true;
             lblTable.Text = "Đang không chọn bàn";
             loginAccount = acc;
+            nmDicsount.Value = 0;
             ChangeAccount(acc.Type);
         }
 
@@ -116,11 +117,12 @@ namespace QuanLyCafe
                              TotalPrice = (float)x3.f.Price * x3.x.bi.count
                          })
                          .ToList();
+            float discountPrice = menu.Sum(item => item.TotalPrice) * (100-(int)nmDicsount.Value) / 100;
             float totalPrice = menu.Sum(item => item.TotalPrice);
-            lblTotalPrice.Text = totalPrice.ToString("C", new CultureInfo("vi-VN"));
+            lblTotalPrice.Text = discountPrice.ToString("C", new CultureInfo("vi-VN"));
+            nmDicsount.Tag = totalPrice;
             return menu;
         }
-
 
         private int getUncheckBillByTableID(int ID)
         {
@@ -223,7 +225,6 @@ namespace QuanLyCafe
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
                 CFTable cFTable = lsvBill.Tag as CFTable;
                 if (cFTable == null)
                 {
@@ -261,13 +262,15 @@ namespace QuanLyCafe
             }
         }
 
-        private void CheckOut(int BillID)
+        private void CheckOut(int BillID, decimal totalPrice)
         {
             var bill = db.Bills.FirstOrDefault(b => b.idBill == BillID);
             if (bill != null)
             {
                 bill.Status = true;
                 bill.DateCheckOut = DateTime.Now;
+                bill.Discount = (int)nmDicsount.Value;
+                bill.totalPrice = (double)totalPrice;
                 db.SaveChanges();
             }
         }
@@ -278,9 +281,9 @@ namespace QuanLyCafe
             int idBill = getUncheckBillByTableID(table.idTable);
             if(idBill != -1)
             {
-                if (MessageBox.Show("Bạn có chắc muốn thanh toán hoá đơn cho bàn " + table.Name + "không?", "Thông báo",MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show("Bạn có chắc muốn thanh toán hoá đơn cho bàn " + table.Name + " không?", "Thông báo",MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    CheckOut(idBill);
+                    CheckOut(idBill, discountPrice());
                     showBill(table.idTable);
                     UpdateTableStatus();
                     loadTable();
@@ -305,5 +308,17 @@ namespace QuanLyCafe
             db.SaveChanges();
         }
 
+        private void nmDicsount_ValueChanged(object sender, EventArgs e)
+        {
+            
+            decimal priceDiscount = discountPrice();
+            lblTotalPrice.Text = priceDiscount.ToString("C", new CultureInfo("vi-VN"));
+        }
+
+        private decimal discountPrice()
+        {
+            decimal totalPrice = decimal.Parse(nmDicsount.Tag?.ToString() ?? "0");
+            return totalPrice * ((100 - (decimal)nmDicsount.Value) / 100);
+        }
     }
 }

@@ -1,4 +1,4 @@
-namespace QuanLyCafe.Model
+﻿namespace QuanLyCafe.Model
 {
     using System;
     using System.Collections.Generic;
@@ -23,6 +23,7 @@ namespace QuanLyCafe.Model
         public string Name { get; set; }
 
         public bool Status { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bills { get; set; }

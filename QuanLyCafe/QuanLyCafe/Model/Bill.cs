@@ -26,6 +26,10 @@ namespace QuanLyCafe.Model
 
         public int idTable { get; set; }
 
+        public int Discount { get; set; }
+
+        public double totalPrice { get; set; }
+
         public virtual CFTable CFTable { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

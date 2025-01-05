@@ -202,24 +202,33 @@ namespace QuanLyCafe
 
         private void insertBillInfo(int BillID, int FoodID, int Count)
         {
-            var billInfo = db.BillInfoes.FirstOrDefault(bi => bi.idBill == BillID && bi.idFood == FoodID);
-
-            if (billInfo != null)
+            try
             {
-                //Cập nhật số lượng món ăn
-                billInfo.count += Count;
-                if (billInfo.count <= 0)
+                var billInfo = db.BillInfoes.FirstOrDefault(bi => bi.idBill == BillID && bi.idFood == FoodID);
+
+                if (billInfo != null)
                 {
-                    db.BillInfoes.Remove(billInfo);
+                    //Cập nhật số lượng món ăn
+                    billInfo.count += Count;
+                    if (billInfo.count <= 0)
+                    {
+                        db.BillInfoes.Remove(billInfo);
+                        loadTable();
+                    }
                 }
-            }
-            else
-            {
-                // Thêm món ăn mới vào hóa đơn
-                db.BillInfoes.Add(new BillInfo { idBill = BillID, idFood = FoodID, count = Count });
-            }
+                else
+                {
+                    // Thêm món ăn mới vào hóa đơn
+                    db.BillInfoes.Add(new BillInfo { idBill = BillID, idFood = FoodID, count = Count });
+                }
 
-            db.SaveChanges();
+                db.SaveChanges();
+
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng nhập số lượng món", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 

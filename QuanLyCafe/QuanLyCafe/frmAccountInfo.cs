@@ -38,7 +38,7 @@ namespace QuanLyCafe
         private bool UpdateAccount(string username, string displayname, string password, string newpassword)
         {
             var account = db.Accounts.FirstOrDefault(x => x.UserName == username && x.Password == password);
-            if (account != null)
+            if (account != null && newpassword == txtNewPassComf.Text)
             {
                 account.DisplayName = displayname;
                 account.Password = newpassword;
@@ -82,7 +82,7 @@ namespace QuanLyCafe
                 }
                 else
                 {
-                    MessageBox.Show("Mật khẩu không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Mật khẩu và xác nhận mật khẩu không khớp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
